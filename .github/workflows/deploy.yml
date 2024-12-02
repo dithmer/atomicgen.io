@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0.0
         with:
-          publish-dir: './build'  # Yapı çıktı dizinini ayarlayın
+          publish-dir: './build'
           production-deploy: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
