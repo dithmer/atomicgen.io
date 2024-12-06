@@ -158,6 +158,7 @@ function App() {
 
   // Check if inputs are updated
   useEffect(() => {
+    console.log('inputs', inputs)
     if (JSON.stringify(inputs) === JSON.stringify(base)) {
       setUpdated(false);
       setChanged(false);

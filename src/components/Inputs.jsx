@@ -14,10 +14,13 @@ import {
     Chip
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import PropTypes from 'prop-types';
 import Arguments from './Inputs/Arguments';
 import Dependency from './Inputs/Dependency';
 import Editor from './Editor';
+import ShowSamplesButton from './Inputs/ShowSamplesButton';
 
 // Constants for dropdown menu properties
 const ITEM_HEIGHT = 48;
@@ -33,7 +36,7 @@ const MenuProps = {
 
 // Functional component for managing inputs
 function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
-    
+
     // Handle changes to text fields (e.g., Atomic Name, Atomic Description)
     const handleChangeText = (e) => {
         const { name, value } = e.target;
@@ -100,6 +103,9 @@ function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supporte
 
     return (
         <Box>
+            <Box sx={{ mb: 2 }}>
+                <ShowSamplesButton setInputs={setInputs}/>
+            </Box>
             {/* Input for Atomic Name */}
             <Box sx={{ mb: 2 }}>
                 <TextField
