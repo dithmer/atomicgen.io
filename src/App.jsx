@@ -36,12 +36,12 @@ const base = {
   description: null,
   supported_platforms: [],
   input_arguments: [],
-  dependency_executor_name: null,
+  dependency_executor_name: "",
   dependencies: [],
   executor: {
     command: null,
     cleanup_command: null,
-    name: null,
+    name: "",
     elevation_required: false,
   },
 };
@@ -158,7 +158,6 @@ function App() {
 
   // Check if inputs are updated
   useEffect(() => {
-    console.log('inputs', inputs)
     if (JSON.stringify(inputs) === JSON.stringify(base)) {
       setUpdated(false);
       setChanged(false);
@@ -205,6 +204,8 @@ function App() {
         <Grid container spacing={2}>
           <Grid size={isPortrait ? 12 : 6}>
             <Inputs
+              changed={changed}
+              setChanged={setChanged}
               executor_names={executor_names}
               supported_platforms={supported_platforms}
               inputs={inputs}
