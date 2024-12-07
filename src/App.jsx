@@ -128,8 +128,14 @@ function App() {
   const [validationErrors, setValidationErrors] = useState([]);
   const [updated, setUpdated] = useState(false);
   const [inputs, setInputs] = useState(base);
+  const [darkMode, setDarkMode] = useState(true);
   const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
   const [changed, setChanged] = useState(false);
+  const [buttonVariant, setButtonVariant] = useState('outlined');
+
+  useEffect(() => {
+    setButtonVariant(darkMode ? 'outlined' : 'contained');
+  }, [darkMode]);
 
   // Prevent page reload
   useEffect(() => {
@@ -183,7 +189,7 @@ function App() {
     palette: {
       mode: 'dark',
       primary: {
-        main: red[700],
+        main: red[500],
         contrastText: '#fff',
       },
       background: {
@@ -196,14 +202,33 @@ function App() {
     },
   });
 
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: red[900],
+        contrastText: '#fff',
+      },
+      background: {
+        paper: "#fff",
+      },
+      text: {
+        primary: "#000",
+        secondary: grey[600],
+      },
+    },
+  });
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <Navbar/>
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Box sx={{ p: 2 }}>
         <Grid container spacing={2}>
           <Grid size={isPortrait ? 12 : 6}>
             <Inputs
+              buttonVariant={buttonVariant}
+              darkMode={darkMode}
               changed={changed}
               setChanged={setChanged}
               executor_names={executor_names}
@@ -216,6 +241,8 @@ function App() {
           </Grid>
           <Grid size={isPortrait ? 12 : 6}>
             <YamlContent
+              buttonVariant={buttonVariant}
+              darkMode={darkMode}
               base={base}
               errors={errors}
               setErrors={setErrors}

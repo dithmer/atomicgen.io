@@ -16,7 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Editor from '../Editor';
 
 // Dependency component for managing prerequisite commands and dependencies
-function Dependency({ inputs, setInputs, executor_names }) {
+function Dependency({ buttonVariant, inputs, setInputs, executor_names }) {
     // State for managing tooltip visibility
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
@@ -86,7 +86,12 @@ function Dependency({ inputs, setInputs, executor_names }) {
 
             {/* Button to add a new dependency */}
             <Box sx={{ mt: 1 }}>
-                <Button startIcon={<AddCircleOutlineIcon />} sx={{ mr: 2, mb: 1 }} variant="text" onClick={addDependency}>
+                <Button 
+                    startIcon={<AddCircleOutlineIcon />} 
+                    sx={{ mr: 2, mb: 1 }} 
+                    variant={buttonVariant} 
+                    onClick={addDependency}
+                >
                     Add Dependency {inputs.dependencies.length > 0 ? `(${inputs.dependencies.length})` : ''}
                 </Button>
             </Box>
@@ -176,8 +181,8 @@ function Dependency({ inputs, setInputs, executor_names }) {
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                         <IconButton
                             size='large'
-                            color="error"
-                            variant="outlined"
+                            color="primary"
+                            variant={buttonVariant}
                             key={`remove-${index}`}
                             onClick={() => removeDependency(index)}
                         >

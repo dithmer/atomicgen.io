@@ -61,7 +61,7 @@ function cleanObject(obj) {
 }
 
 // Main component to handle YAML content display and interactions
-function YamlContent({ inputs, setInputs, updated, base, validationErrors, setChanged, changed }) {
+function YamlContent({ darkMode, buttonVariant, inputs, setInputs, updated, base, validationErrors, setChanged, changed }) {
   const [formatted_yaml, setFormattedYaml] = React.useState(null); // Stores formatted YAML content
   const [showContent, setShowContent] = React.useState(false); // Toggles YAML content display
   const [showValidationErrors, setShowValidationErrors] = React.useState(false); // Toggles validation error display
@@ -144,7 +144,7 @@ function YamlContent({ inputs, setInputs, updated, base, validationErrors, setCh
     <Box>
       {/* Button group for actions: Download, Copy, Reset */}
       <Box sx={{ mb: 2 }}>
-        <ButtonGroup variant="outlined" aria-label="Basic button group">
+        <ButtonGroup variant={buttonVariant} aria-label="Basic button group">
           <Button disabled={!showContent} onClick={downloadButtonHandle}>
             Download {changed ? "*" : ""}
           </Button>
@@ -173,6 +173,7 @@ function YamlContent({ inputs, setInputs, updated, base, validationErrors, setCh
       <Box>
         {showContent ? (
           <Editor
+            darkMode={darkMode}
             name="yaml-content"
             value={formatted_yaml}
             mode="yaml"

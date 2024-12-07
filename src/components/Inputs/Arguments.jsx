@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 // Arguments component for managing input arguments
-function Arguments({ errors, setErrors, inputs, setInputs }) {
+function Arguments({ buttonVariant, errors, setErrors, inputs, setInputs }) {
     // Check if there are duplicate names among the input arguments
     function hasDuplicateNames(data) {
         const names = data.map(obj => obj.name.trim());
@@ -90,7 +90,7 @@ function Arguments({ errors, setErrors, inputs, setInputs }) {
                 <Button
                     sx={{ mb: 1 }}
                     startIcon={<AddCircleOutlineIcon />}
-                    variant="text"
+                    variant={buttonVariant}
                     onClick={addInputArgument}
                 >
                     Add Input Argument {inputs.input_arguments.length > 0 ? `(${inputs.input_arguments.length})` : ''}
@@ -177,8 +177,8 @@ function Arguments({ errors, setErrors, inputs, setInputs }) {
                         <IconButton
                             aria-label="delete"
                             size="large"
-                            color="error"
-                            variant="outlined"
+                            color="primary"
+                            variant={buttonVariant}
                             onClick={() => removeInputArgument(index)}
                         >
                             <DeleteIcon fontSize="inherit" />

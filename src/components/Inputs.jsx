@@ -33,7 +33,7 @@ const MenuProps = {
 };
 
 // Functional component for managing inputs
-function Inputs({ changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
+function Inputs({ darkMode, buttonVariant, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
 
     // Handle changes to text fields (e.g., Atomic Name, Atomic Description)
     const handleChangeText = (e) => {
@@ -103,9 +103,11 @@ function Inputs({ changed, setChanged, errors, setErrors, inputs, setInputs, exe
         <Box>
             <Box sx={{ mb: 2 }}>
                 <InputButtons 
+                    buttonVariant={buttonVariant}
                     setInputs={setInputs}
                     setChanged={setChanged}
                     changed={changed}
+                    darkMode={darkMode}
                 />
             </Box>
             {/* Input for Atomic Name */}
@@ -216,6 +218,7 @@ function Inputs({ changed, setChanged, errors, setErrors, inputs, setInputs, exe
                     Attack Command *
                 </Typography>
                 <Editor
+                    darkMode={darkMode}
                     mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                     name="attack-command-editor"
                     value={inputs.executor.command || ''}
@@ -231,6 +234,7 @@ function Inputs({ changed, setChanged, errors, setErrors, inputs, setInputs, exe
                     Cleanup Command (Optional)
                 </Typography>
                 <Editor
+                    darkMode={darkMode}
                     mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                     name="cleanup-command-editor"
                     value={inputs.executor.cleanup_command || ''}
@@ -244,10 +248,10 @@ function Inputs({ changed, setChanged, errors, setErrors, inputs, setInputs, exe
             <Box sx={{ mb: 2 }}>
                 <Grid container spacing={2}>
                     <Grid size={6}>
-                        <Dependency executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Dependency buttonVariant={buttonVariant} executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                     <Grid size={6}>
-                        <Arguments errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Arguments buttonVariant={buttonVariant} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                 </Grid>
             </Box>

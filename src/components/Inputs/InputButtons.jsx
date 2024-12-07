@@ -15,7 +15,7 @@ import { Typography } from '@mui/material';
 
 
 
-export default function InputButtons({ setInputs, setChanged, changed }) {
+export default function InputButtons({ darkMode, buttonVariant, setInputs, setChanged, changed }) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 
@@ -44,14 +44,14 @@ export default function InputButtons({ setInputs, setChanged, changed }) {
     return (
         <React.Fragment>
             <ButtonGroup
-                variant="outlined"
+                variant={buttonVariant}
                 ref={anchorRef}
-                aria-label="Button group with a nested menu"
+                aria-label="Load attack test sample"
             >
                 <Button
                     aria-controls={open ? 'split-button-menu' : undefined}
                     aria-expanded={open ? 'true' : undefined}
-                    aria-label="select merge strategy"
+                    aria-label="load sample"
                     aria-haspopup="menu"
                     onClick={handleToggle}
                     endIcon={<ArrowDropDownIcon />}
@@ -78,9 +78,9 @@ export default function InputButtons({ setInputs, setChanged, changed }) {
                                     <MenuItem onClick={() => loadSample(basic)}>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <Chip
-                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                sx={{ width: 80 }}
                                                 label="Basic"
-                                                variant="outlined"
+                                                variant={darkMode ? "outlined" : "filled"}
                                                 color='warning'
                                                 size="small"
                                             />
@@ -90,9 +90,9 @@ export default function InputButtons({ setInputs, setChanged, changed }) {
                                     <MenuItem onClick={() => loadSample(moderate)}>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <Chip
-                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                sx={{ width: 80 }}
                                                 label="Moderate"
-                                                variant="outlined"
+                                                variant={darkMode ? "outlined" : "filled"}
                                                 color="warning"
                                                 size="small"
                                             />
@@ -102,9 +102,9 @@ export default function InputButtons({ setInputs, setChanged, changed }) {
                                     <MenuItem onClick={() => loadSample(complex)}>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <Chip
-                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                sx={{ width: 80 }}
                                                 label="Complex"
-                                                variant="outlined"
+                                                variant={darkMode ? "outlined" : "filled"}
                                                 color="warning"
                                                 size="small"
                                             />
