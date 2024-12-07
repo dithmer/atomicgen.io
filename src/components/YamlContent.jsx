@@ -61,7 +61,7 @@ function cleanObject(obj) {
 }
 
 // Main component to handle YAML content display and interactions
-function YamlContent({ darkMode, buttonVariant, inputs, setInputs, updated, base, validationErrors, setChanged, changed }) {
+function YamlContent({ darkMode, inputs, setInputs, updated, base, validationErrors, setChanged, changed }) {
   const [formatted_yaml, setFormattedYaml] = React.useState(null); // Stores formatted YAML content
   const [showContent, setShowContent] = React.useState(false); // Toggles YAML content display
   const [showValidationErrors, setShowValidationErrors] = React.useState(false); // Toggles validation error display
@@ -144,7 +144,7 @@ function YamlContent({ darkMode, buttonVariant, inputs, setInputs, updated, base
     <Box>
       {/* Button group for actions: Download, Copy, Reset */}
       <Box sx={{ mb: 2 }}>
-        <ButtonGroup variant={buttonVariant} aria-label="Basic button group">
+        <ButtonGroup variant={darkMode ? "outlined" : "contained"} aria-label="Basic button group">
           <Button disabled={!showContent} onClick={downloadButtonHandle}>
             Download {changed ? "*" : ""}
           </Button>
@@ -160,7 +160,7 @@ function YamlContent({ darkMode, buttonVariant, inputs, setInputs, updated, base
       <Box>
         {showValidationErrors && (
           <Box sx={{ mb: 1 }}>
-            <Alert variant="outlined" severity="warning">
+            <Alert variant={darkMode ? "outlined" : "filled"}  severity="warning">
               <Typography component="span">Some of the required fields are missing.</Typography>
               {[...new Set(validationErrors)].map((error, index) => (
                 <li key={index}>{error}</li>

@@ -12,10 +12,11 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { basic, moderate, complex } from './SampleTests';
 import { Typography } from '@mui/material';
+import UploadButton from './UploadButton';
 
 
 
-export default function InputButtons({ darkMode, buttonVariant, setInputs, setChanged, changed }) {
+export default function InputButtons({ darkMode, setInputs, setChanged, changed }) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 
@@ -44,7 +45,7 @@ export default function InputButtons({ darkMode, buttonVariant, setInputs, setCh
     return (
         <React.Fragment>
             <ButtonGroup
-                variant={buttonVariant}
+                variant={darkMode ? "outlined" : "contained"} 
                 ref={anchorRef}
                 aria-label="Load attack test sample"
             >
@@ -58,6 +59,7 @@ export default function InputButtons({ darkMode, buttonVariant, setInputs, setCh
                 >
                     Load Sample
                 </Button>
+                <UploadButton setInputs={setInputs} darkMode={darkMode}/>
             </ButtonGroup>
             <Popper
                 sx={{ zIndex: 1 }}

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 // Arguments component for managing input arguments
-function Arguments({ buttonVariant, errors, setErrors, inputs, setInputs }) {
+function Arguments({ darkMode, errors, setErrors, inputs, setInputs }) {
     // Check if there are duplicate names among the input arguments
     function hasDuplicateNames(data) {
         const names = data.map(obj => obj.name.trim());
@@ -90,7 +90,7 @@ function Arguments({ buttonVariant, errors, setErrors, inputs, setInputs }) {
                 <Button
                     sx={{ mb: 1 }}
                     startIcon={<AddCircleOutlineIcon />}
-                    variant={buttonVariant}
+                    variant={darkMode ? "outlined" : "contained"} 
                     onClick={addInputArgument}
                 >
                     Add Input Argument {inputs.input_arguments.length > 0 ? `(${inputs.input_arguments.length})` : ''}
@@ -99,7 +99,7 @@ function Arguments({ buttonVariant, errors, setErrors, inputs, setInputs }) {
 
             {/* Display Validation Errors */}
             {errors.length > 0 &&
-                <Alert sx={{ mb: 1 }} variant='outlined' severity="error">
+                <Alert sx={{ mb: 1 }} variant={darkMode ? "outlined" : "filled"}  severity="error">
                     {errors.map((error, index) => (
                         <li key={index}>
                             {error}
@@ -178,7 +178,7 @@ function Arguments({ buttonVariant, errors, setErrors, inputs, setInputs }) {
                             aria-label="delete"
                             size="large"
                             color="primary"
-                            variant={buttonVariant}
+                            variant={darkMode ? "outlined" : "contained"} 
                             onClick={() => removeInputArgument(index)}
                         >
                             <DeleteIcon fontSize="inherit" />

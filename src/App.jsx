@@ -131,10 +131,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
   const [changed, setChanged] = useState(false);
-  const [buttonVariant, setButtonVariant] = useState('outlined');
+  const [componentVariant, setComponentVariant] = useState('outlined');
 
   useEffect(() => {
-    setButtonVariant(darkMode ? 'outlined' : 'contained');
+    setComponentVariant(darkMode ? 'outlined' : 'contained');
   }, [darkMode]);
 
   // Prevent page reload
@@ -160,6 +160,13 @@ function App() {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const cachedTheme = localStorage.getItem('darkMode');
+    if (cachedTheme !== null) {
+      setDarkMode(cachedTheme === 'true');
+    }
   }, []);
 
   // Check if inputs are updated
@@ -227,7 +234,6 @@ function App() {
         <Grid container spacing={2}>
           <Grid size={isPortrait ? 12 : 6}>
             <Inputs
-              buttonVariant={buttonVariant}
               darkMode={darkMode}
               changed={changed}
               setChanged={setChanged}
@@ -241,7 +247,6 @@ function App() {
           </Grid>
           <Grid size={isPortrait ? 12 : 6}>
             <YamlContent
-              buttonVariant={buttonVariant}
               darkMode={darkMode}
               base={base}
               errors={errors}

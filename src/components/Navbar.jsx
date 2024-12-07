@@ -40,7 +40,9 @@ function Navbar( { darkMode, setDarkMode } ) {
 
   // Function to toggle the theme mode
   const handleThemeToggle = () => {
-    setDarkMode(!darkMode);
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', newMode);
   };
 
   return (

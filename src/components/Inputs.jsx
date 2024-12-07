@@ -33,7 +33,7 @@ const MenuProps = {
 };
 
 // Functional component for managing inputs
-function Inputs({ darkMode, buttonVariant, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
+function Inputs({ darkMode, componentVariant, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
 
     // Handle changes to text fields (e.g., Atomic Name, Atomic Description)
     const handleChangeText = (e) => {
@@ -103,7 +103,6 @@ function Inputs({ darkMode, buttonVariant, changed, setChanged, errors, setError
         <Box>
             <Box sx={{ mb: 2 }}>
                 <InputButtons 
-                    buttonVariant={buttonVariant}
                     setInputs={setInputs}
                     setChanged={setChanged}
                     changed={changed}
@@ -248,10 +247,10 @@ function Inputs({ darkMode, buttonVariant, changed, setChanged, errors, setError
             <Box sx={{ mb: 2 }}>
                 <Grid container spacing={2}>
                     <Grid size={6}>
-                        <Dependency buttonVariant={buttonVariant} executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Dependency darkMode={darkMode} executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                     <Grid size={6}>
-                        <Arguments buttonVariant={buttonVariant} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Arguments darkMode={darkMode} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                 </Grid>
             </Box>
