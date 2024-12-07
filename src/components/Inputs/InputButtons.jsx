@@ -7,6 +7,7 @@ import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { basic, moderate, complex } from './SampleTests';
@@ -75,18 +76,43 @@ export default function InputButtons({ setInputs, setChanged, changed }) {
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList id="split-button-menu" autoFocusItem>
                                     <MenuItem onClick={() => loadSample(basic)}>
-                                        <Chip sx={{mr: 1}} label="Basic" variant='outlined' color="warning" size='small' />
-                                        <Typography fontSize={15}>{basic.name}</Typography> 
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Chip
+                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                label="Basic"
+                                                variant="outlined"
+                                                color='warning'
+                                                size="small"
+                                            />
+                                            <Typography fontSize={15}>{basic.name}</Typography>
+                                        </Box>
                                     </MenuItem>
                                     <MenuItem onClick={() => loadSample(moderate)}>
-                                        <Chip sx={{mr: 1}} label="Moderate" variant='outlined' color="warning" size='small' />
-                                        <Typography fontSize={15}>{moderate.name}</Typography> 
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Chip
+                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                label="Moderate"
+                                                variant="outlined"
+                                                color="warning"
+                                                size="small"
+                                            />
+                                            <Typography fontSize={15}>{moderate.name}</Typography>
+                                        </Box>
                                     </MenuItem>
                                     <MenuItem onClick={() => loadSample(complex)}>
-                                        <Chip sx={{mr: 1}} label="Complex" variant='outlined' color="warning" size='small' />
-                                        <Typography fontSize={15}>{complex.name}</Typography> 
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Chip
+                                                sx={{ width: 80 }} // Sabit bir genişlik verildi
+                                                label="Complex"
+                                                variant="outlined"
+                                                color="warning"
+                                                size="small"
+                                            />
+                                            <Typography fontSize={15}>{complex.name}</Typography>
+                                        </Box>
                                     </MenuItem>
                                 </MenuList>
+
                             </ClickAwayListener>
                         </Paper>
                     </Grow>
