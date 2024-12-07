@@ -48,6 +48,7 @@ export default function UploadButton({ darkMode, setInputs }) {
     return (
         <Button
             component="label"
+            disabled
             role={undefined}
             variant={darkMode ? "outlined" : "contained"} 
             tabIndex={-1}
