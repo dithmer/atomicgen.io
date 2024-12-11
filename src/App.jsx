@@ -10,7 +10,7 @@ import { red, grey } from '@mui/material/colors';
 
 const executor_names = [
   "powershell",
-  "command prompt",
+  "command_prompt",
   "bash",
   "sh",
 ];
