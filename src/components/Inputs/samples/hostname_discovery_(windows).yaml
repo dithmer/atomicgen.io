@@ -1,0 +1,10 @@
+- name: Hostname Discovery (Windows)
+  description: |
+    Identify system hostname for Windows. Upon execution, the hostname of the device will be displayed.
+  supported_platforms:
+    - windows
+  executor:
+    command: |
+      hostname
+    name: command_prompt
+    elevation_required: false

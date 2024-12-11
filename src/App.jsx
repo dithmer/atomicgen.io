@@ -10,7 +10,7 @@ import { red, grey } from '@mui/material/colors';
 
 const executor_names = [
   "powershell",
-  "command prompt",
+  "command_prompt",
   "bash",
   "sh",
 ];
@@ -131,11 +131,6 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
   const [changed, setChanged] = useState(false);
-  const [componentVariant, setComponentVariant] = useState('outlined');
-
-  useEffect(() => {
-    setComponentVariant(darkMode ? 'outlined' : 'contained');
-  }, [darkMode]);
 
   // Prevent page reload
   useEffect(() => {
@@ -234,6 +229,7 @@ function App() {
         <Grid container spacing={2}>
           <Grid size={isPortrait ? 12 : 6}>
             <Inputs
+              base={base}
               darkMode={darkMode}
               changed={changed}
               setChanged={setChanged}

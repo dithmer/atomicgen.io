@@ -33,7 +33,7 @@ const MenuProps = {
 };
 
 // Functional component for managing inputs
-function Inputs({ darkMode, componentVariant, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
+function Inputs({ base, darkMode, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
 
     // Handle changes to text fields (e.g., Atomic Name, Atomic Description)
     const handleChangeText = (e) => {
@@ -103,6 +103,7 @@ function Inputs({ darkMode, componentVariant, changed, setChanged, errors, setEr
         <Box>
             <Box sx={{ mb: 2 }}>
                 <InputButtons 
+                    base={base}
                     setInputs={setInputs}
                     setChanged={setChanged}
                     changed={changed}
