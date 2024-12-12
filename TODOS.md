@@ -1,4 +1,4 @@
-- [ ] Dark / Light mode switcher
-- [ ] Atomic attack YAML upload to edit exist one
+- [x] Dark / Light mode switcher
+- [x] Atomic attack YAML upload to edit exist one
+- [x] Show sample atomic test button
 - [ ] Dependabot configuration
-- [ ] Show sample atomic test button
