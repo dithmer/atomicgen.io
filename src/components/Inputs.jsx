@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import Arguments from './Inputs/Arguments';
 import Dependency from './Inputs/Dependency';
 import Editor from './Editor';
+import InputButtons from './Inputs/InputButtons';
 
 // Constants for dropdown menu properties
 const ITEM_HEIGHT = 48;
@@ -32,8 +33,8 @@ const MenuProps = {
 };
 
 // Functional component for managing inputs
-function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
-    
+function Inputs({ inputButtonErrors, setInputButtonErrors, base, darkMode, changed, setChanged, errors, setErrors, inputs, setInputs, executor_names, supported_platforms }) {
+
     // Handle changes to text fields (e.g., Atomic Name, Atomic Description)
     const handleChangeText = (e) => {
         const { name, value } = e.target;
@@ -100,6 +101,18 @@ function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supporte
 
     return (
         <Box>
+            <Box sx={{ mb: 2 }}>
+                <InputButtons 
+                    inputButtonErrors={inputButtonErrors}
+                    setInputButtonErrors={setInputButtonErrors}
+                    base={base}
+                    setInputs={setInputs}
+                    setChanged={setChanged}
+                    changed={changed}
+                    darkMode={darkMode}
+
+                />
+            </Box>
             {/* Input for Atomic Name */}
             <Box sx={{ mb: 2 }}>
                 <TextField
@@ -208,6 +221,7 @@ function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supporte
                     Attack Command *
                 </Typography>
                 <Editor
+                    darkMode={darkMode}
                     mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                     name="attack-command-editor"
                     value={inputs.executor.command || ''}
@@ -223,6 +237,7 @@ function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supporte
                     Cleanup Command (Optional)
                 </Typography>
                 <Editor
+                    darkMode={darkMode}
                     mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                     name="cleanup-command-editor"
                     value={inputs.executor.cleanup_command || ''}
@@ -236,10 +251,10 @@ function Inputs({ errors, setErrors, inputs, setInputs, executor_names, supporte
             <Box sx={{ mb: 2 }}>
                 <Grid container spacing={2}>
                     <Grid size={6}>
-                        <Dependency executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Dependency darkMode={darkMode} executor_names={executor_names} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                     <Grid size={6}>
-                        <Arguments errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
+                        <Arguments darkMode={darkMode} errors={errors} setErrors={setErrors} inputs={inputs} setInputs={setInputs} />
                     </Grid>
                 </Grid>
             </Box>

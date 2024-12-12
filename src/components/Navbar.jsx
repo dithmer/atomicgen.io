@@ -12,11 +12,12 @@ import {
   Link
 } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { GitHub as GitHubIcon } from '@mui/icons-material';
+import { GitHub as GitHubIcon, LightMode as LightModeIcon, DarkModeOutlined as DarkModeOutlinedIcon } from '@mui/icons-material';
 
-function Navbar() {
+function Navbar( { darkMode, setDarkMode } ) {
   // State for handling the menu anchor element (useful links dropdown)
   const [anchorEl, setAnchorEl] = useState(null);
+
 
   // List of useful links to display in the dropdown menu
   const usefulLinks = [
@@ -35,6 +36,13 @@ function Navbar() {
   // Function to handle closing the dropdown menu
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  // Function to toggle the theme mode
+  const handleThemeToggle = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', newMode);
   };
 
   return (
@@ -116,7 +124,15 @@ function Navbar() {
             target="_blank"
             color="inherit"
           >
-            <GitHubIcon fontSize='large' />
+            <GitHubIcon fontSize='medium' />
+          </IconButton>
+
+          {/* Theme Toggle Button */}
+          <IconButton
+            onClick={handleThemeToggle}
+            color="inherit"
+          >
+            {darkMode ? <DarkModeOutlinedIcon fontSize="medium" /> : <LightModeIcon fontSize="medium" />}
           </IconButton>
         </Box>
       </Toolbar>

@@ -8,6 +8,7 @@ import 'ace-builds/src-noconflict/mode-yaml';
 
 // Importing the theme for the Ace Editor
 import 'ace-builds/src-noconflict/theme-tomorrow_night_bright';
+import 'ace-builds/src-noconflict/theme-github_light_default';
 
 // Editor component definition
 const Editor = ({
@@ -22,14 +23,15 @@ const Editor = ({
     highlightGutterLine,    // Highlight the line number in the gutter
     maxLines,               // Maximum number of lines before scrolling
     placeholder,            // Placeholder text when editor is empty
-    wrap                    // Text wrapping toggle
+    wrap,                   // Text wrapping toggle
+    darkMode                // Dark mode toggle
 }) => {
     return (
         <AceEditor
             // Setting the programming language mode (e.g., YAML, PowerShell, Shell)
             mode={mode}
             // Applying the "Tomorrow Night Bright" theme for dark mode
-            theme="tomorrow_night_bright"
+            theme={darkMode ? "tomorrow_night_bright" : "github_light_default"}
             // Callback function triggered when the editor content changes
             onChange={onChange}
             // Setting font size or defaulting to 14px

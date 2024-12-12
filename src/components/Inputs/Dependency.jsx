@@ -16,7 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Editor from '../Editor';
 
 // Dependency component for managing prerequisite commands and dependencies
-function Dependency({ inputs, setInputs, executor_names }) {
+function Dependency({ darkMode, inputs, setInputs, executor_names }) {
     // State for managing tooltip visibility
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
@@ -85,8 +85,13 @@ function Dependency({ inputs, setInputs, executor_names }) {
             </Typography>
 
             {/* Button to add a new dependency */}
-            <Box sx={{ mt: 1 }}>
-                <Button startIcon={<AddCircleOutlineIcon />} sx={{ mr: 2, mb: 1 }} variant="text" onClick={addDependency}>
+            <Box sx={{ mt: 1, mb: 1 }}>
+                <Button 
+                    startIcon={<AddCircleOutlineIcon />} 
+                    sx={{ mr: 2, mb: 1 }} 
+                    variant={darkMode ? "outlined" : "contained"} 
+                    onClick={addDependency}
+                >
                     Add Dependency {inputs.dependencies.length > 0 ? `(${inputs.dependencies.length})` : ''}
                 </Button>
             </Box>
@@ -151,6 +156,7 @@ function Dependency({ inputs, setInputs, executor_names }) {
                         Prerequisite Command
                     </Typography>
                     <Editor
+                        darkMode={darkMode}
                         mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                         name="prerequisite-command-editor"
                         value={dependency.prereq_command || ''}
@@ -164,6 +170,7 @@ function Dependency({ inputs, setInputs, executor_names }) {
                         Get Prerequisite Command
                     </Typography>
                     <Editor
+                        darkMode={darkMode}
                         mode={inputs.executor.name === "powershell" ? "powershell" : "sh"}
                         name="prerequisite-command-editor"
                         value={dependency.get_prereq_command || ''}
@@ -176,8 +183,8 @@ function Dependency({ inputs, setInputs, executor_names }) {
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                         <IconButton
                             size='large'
-                            color="error"
-                            variant="outlined"
+                            color="primary"
+                            variant={darkMode ? "outlined" : "contained"} 
                             key={`remove-${index}`}
                             onClick={() => removeDependency(index)}
                         >

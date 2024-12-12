@@ -36,12 +36,12 @@ const base = {
   description: null,
   supported_platforms: [],
   input_arguments: [],
-  dependency_executor_name: null,
+  dependency_executor_name: "",
   dependencies: [],
   executor: {
     command: null,
     cleanup_command: null,
-    name: null,
+    name: "",
     elevation_required: false,
   },
 };
@@ -126,8 +126,10 @@ const validateInputs = (data, rules) => {
 function App() {
   const [errors, setErrors] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
+  const [inputButtonErrors, setInputButtonErrors] = useState([]);
   const [updated, setUpdated] = useState(false);
   const [inputs, setInputs] = useState(base);
+  const [darkMode, setDarkMode] = useState(true);
   const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
   const [changed, setChanged] = useState(false);
 
@@ -156,6 +158,13 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const cachedTheme = localStorage.getItem('darkMode');
+    if (cachedTheme !== null) {
+      setDarkMode(cachedTheme === 'true');
+    }
+  }, []);
+
   // Check if inputs are updated
   useEffect(() => {
     if (JSON.stringify(inputs) === JSON.stringify(base)) {
@@ -169,6 +178,7 @@ function App() {
 
   // Validate inputs
   useEffect(() => {
+    setInputButtonErrors([]);
     if (updated) {
 
       const errors = validateInputs(inputs, validationRules);
@@ -183,7 +193,7 @@ function App() {
     palette: {
       mode: 'dark',
       primary: {
-        main: red[700],
+        main: red[500],
         contrastText: '#fff',
       },
       background: {
@@ -196,24 +206,48 @@ function App() {
     },
   });
 
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: red[900],
+        contrastText: '#fff',
+      },
+      background: {
+        paper: "#fff",
+      },
+      text: {
+        primary: "#000",
+        secondary: grey[600],
+      },
+    },
+  });
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <Navbar/>
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Box sx={{ p: 2 }}>
         <Grid container spacing={2}>
           <Grid size={isPortrait ? 12 : 6}>
             <Inputs
+              base={base}
+              darkMode={darkMode}
+              changed={changed}
+              setChanged={setChanged}
               executor_names={executor_names}
               supported_platforms={supported_platforms}
               inputs={inputs}
               setInputs={setInputs}
               errors={errors}
               setErrors={setErrors}
+              inputButtonErrors={inputButtonErrors}
+              setInputButtonErrors={setInputButtonErrors}
             />
           </Grid>
           <Grid size={isPortrait ? 12 : 6}>
             <YamlContent
+              darkMode={darkMode}
               base={base}
               errors={errors}
               setErrors={setErrors}
