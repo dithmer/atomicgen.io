@@ -126,6 +126,7 @@ const validateInputs = (data, rules) => {
 function App() {
   const [errors, setErrors] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
+  const [inputButtonErrors, setInputButtonErrors] = useState([]);
   const [updated, setUpdated] = useState(false);
   const [inputs, setInputs] = useState(base);
   const [darkMode, setDarkMode] = useState(true);
@@ -177,6 +178,7 @@ function App() {
 
   // Validate inputs
   useEffect(() => {
+    setInputButtonErrors([]);
     if (updated) {
 
       const errors = validateInputs(inputs, validationRules);
@@ -239,6 +241,8 @@ function App() {
               setInputs={setInputs}
               errors={errors}
               setErrors={setErrors}
+              inputButtonErrors={inputButtonErrors}
+              setInputButtonErrors={setInputButtonErrors}
             />
           </Grid>
           <Grid size={isPortrait ? 12 : 6}>

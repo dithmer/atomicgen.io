@@ -18,7 +18,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
-export default function UploadButton({ setChanged, changed, base, darkMode, setInputs, setErrorMessage }) {
+export default function UploadButton({ inputButtonErrors, setInputButtonErrors, setChanged, changed, base, darkMode, setInputs }) {
     const [open, setOpen] = React.useState(false);
     const [atomicNames, setAtomicNames] = React.useState([]);
     const [techniqueName, setTechniqueName] = React.useState(null);
@@ -26,6 +26,7 @@ export default function UploadButton({ setChanged, changed, base, darkMode, setI
     const [fileContent, setFileContent] = React.useState(null);
 
     const handleFileUpload = async (event) => {
+        setInputButtonErrors([]);
         if (changed) {
             const confirm = window.confirm('Are you sure you want to load another test? Your current inputs will be overwritten.');
             if (!confirm) return;
@@ -34,7 +35,7 @@ export default function UploadButton({ setChanged, changed, base, darkMode, setI
         if (file) {
             const fileExtension = file.name.split('.').pop().toLowerCase();
             if (fileExtension !== "yaml" && fileExtension !== "yml") {
-                setErrorMessage("Only yaml files can be uploaded.");
+                setInputButtonErrors([...inputButtonErrors, "Only yaml files can be uploaded."]);
                 console.error("Only yaml files can be uploaded.");
                 return;
             }
@@ -54,10 +55,9 @@ export default function UploadButton({ setChanged, changed, base, darkMode, setI
 
             } catch (error) {
                 console.error("Error while file processing the yaml file, check format.", error);
-                setErrorMessage("Error while file processing the yaml file, check format.");
+                setInputButtonErrors([...inputButtonErrors, "Error while file processing the yaml file, check format."])
             } finally {
                 event.target.value = null;
-                setChanged(false); // // // // //
             }
         }
     };

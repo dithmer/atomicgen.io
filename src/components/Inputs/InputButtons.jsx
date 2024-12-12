@@ -21,9 +21,8 @@ import transformInputArguments from './transformInputArguments';
 
 
 
-export default function InputButtons({ base, darkMode, setInputs, setChanged, changed }) {
+export default function InputButtons({ inputButtonErrors, setInputButtonErrors, base, darkMode, setInputs, setChanged, changed }) {
     const [open, setOpen] = React.useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
     const [samples, setSamples] = useState([]);
     const anchorRef = React.useRef(null);
 
@@ -54,7 +53,7 @@ export default function InputButtons({ base, darkMode, setInputs, setChanged, ch
     };
 
 
-    
+
 
     const loadSample = async (level) => {
         if (changed) {
@@ -87,15 +86,17 @@ export default function InputButtons({ base, darkMode, setInputs, setChanged, ch
                     base={base}
                     setInputs={setInputs}
                     darkMode={darkMode}
-                    setErrorMessage={setErrorMessage}
-                    errorMessage={errorMessage}
+                    setInputButtonErrors={setInputButtonErrors}
+                    inputButtonErrors={inputButtonErrors}
                     setChanged={setChanged}
                     changed={changed}
                 />
             </ButtonGroup>
-            {errorMessage &&
+            {inputButtonErrors.length > 0 &&
                 <Alert sx={{ mt: 1 }} variant={darkMode ? "outlined" : "filled"} severity='error'>
-                    {errorMessage}
+                        {inputButtonErrors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
                 </Alert>
             }
             <Popper
