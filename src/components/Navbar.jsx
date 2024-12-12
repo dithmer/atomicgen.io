@@ -141,7 +141,7 @@ function Navbar( { darkMode, setDarkMode } ) {
       <Box
         sx={{
           height: '1px',
-          background: '#d32f2f', // Red to blue gradient effect
+          background: darkMode ? '#d32f2f' : "#fff", 
         }}
       />
     </AppBar>
