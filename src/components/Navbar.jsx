@@ -26,6 +26,7 @@ function Navbar( { darkMode, setDarkMode } ) {
     { text: 'Atomic Red Team', url: 'https://atomicredteam.io' },
     { text: 'Invoke-AtomicRedTeam', url: 'https://www.atomicredteam.io/invoke-atomicredteam' },
     { text: 'Slack Workspace', url: 'https://slack.atomicredteam.io/' },
+    { text: 'AttackRuleMap', url: 'https://attackrulemap.com/' },
   ];
 
   // Function to handle opening the dropdown menu
